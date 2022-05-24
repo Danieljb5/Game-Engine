@@ -10,7 +10,7 @@
 
 namespace detail
 {
-    void* load_library(const char* library)
+    void* load_library(const char* library, bool required = false)
     {
         std::string lib_name = "lib";
         lib_name += library;
@@ -20,7 +20,12 @@ namespace detail
         if(error)
         {
             std::cout << error << "\n";
-            return nullptr;
+            if(!required)
+            {
+                return nullptr;
+            }
+            std::cout << "could not load required library, exiting\n";
+            exit(1);
         }
         return lib;
     }
