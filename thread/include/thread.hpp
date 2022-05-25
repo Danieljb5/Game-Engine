@@ -39,6 +39,10 @@ namespace cl
         return wait_ns(nanoseconds);
         STUB_B(wait_ns, void, const uint64_t& nanoseconds)
 
+        STUB_A(lazy_wait_ns, void, const uint64_t& nanoseconds, const uint64_t& sleep_interval)
+        return lazy_wait_ns(nanoseconds, sleep_interval);
+        STUB_B(lazy_wait_ns, void, const uint64_t& nanoseconds, const uint64_t& sleep_interval)
+
         STUB_A(sleep_until_ns, void, const bool& condition, const uint64_t& sleep_interval)
         return sleep_until_ns(condition, sleep_interval);
         STUB_B(sleep_until_ns, void, const bool& condition, const uint64_t& sleep_interval)
@@ -54,6 +58,10 @@ namespace cl
         STUB_A(wait, void, const double& seconds)
         return wait(seconds);
         STUB_B(wait, void, const double& seconds)
+
+        STUB_A(lazy_wait, void, const double& seconds, const double& sleep_interval)
+        return lazy_wait(seconds, sleep_interval);
+        STUB_B(lazy_wait, void, const double& seconds, const double& sleep_interval)
 
         STUB_A(sleep_until, void, const bool& condition, const double& sleep_interval)
         return sleep_until(condition, sleep_interval);

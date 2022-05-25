@@ -37,6 +37,12 @@ int main()
     duration = cl::thread::current_time() - start;
     cl::log::info("Took " + std::to_string(duration) + " seconds");
 
+    cl::log::info("Starting thread test, testing 1 second lazy wait");
+    start = cl::thread::current_time();
+    cl::thread::lazy_wait(1, 0.0001);
+    duration = cl::thread::current_time() - start;
+    cl::log::info("Took " + std::to_string(duration) + " seconds");
+
     cl::log::info("Starting multithreaded test...");
     cl::thread::new_thread("thread", thread);
 

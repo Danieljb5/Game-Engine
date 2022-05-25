@@ -106,6 +106,18 @@ extern "C"
         }
     }
 
+    void lazy_wait_ns(const uint64_t& nanoseconds, const uint64_t& sleep_interval)
+    {
+        const uint64_t start = current_time_ns();
+        const uint64_t end = start + nanoseconds;
+        uint64_t curr = start;
+        while(curr < end)
+        {
+            sleep_ns(sleep_interval);
+            curr = current_time_ns();
+        }
+    }
+
     void sleep_until_ns(const bool& condition, const uint64_t& sleep_interval)
     {
         while(!condition)
@@ -130,6 +142,11 @@ extern "C"
     void wait(const double& seconds)
     {
         wait_ns(seconds * 1000000000);
+    }
+
+    void lazy_wait(const double& seconds, const double& sleep_interval)
+    {
+        lazy_wait_ns(seconds * 1000000000, sleep_interval * 1000000000);
     }
 
     void sleep_until(const bool& condition, const double& sleep_interval)
