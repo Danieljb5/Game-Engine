@@ -70,5 +70,67 @@ namespace cl
         STUB_A(wait_until, void, const bool& condition, const double& wait_interval)
         return wait_until(condition, wait_interval);
         STUB_B(wait_until, void, const bool& condition, const double& wait_interval)
+
+        class scoped_sleep
+        {
+        public:
+            scoped_sleep(const double& seconds)
+            {
+                start_time = current_time();
+                end_time = start_time + seconds;
+            }
+
+            ~scoped_sleep()
+            {
+                const double c_time = current_time();
+                sleep(end_time - c_time);
+            }
+
+        private:
+            double start_time;
+            double end_time;
+        };
+
+        class scoped_wait
+        {
+        public:
+            scoped_wait(const double& seconds)
+            {
+                start_time = current_time();
+                end_time = start_time + seconds;
+            }
+
+            ~scoped_wait()
+            {
+                const double c_time = current_time();
+                wait(end_time - c_time);
+            }
+
+        private:
+            double start_time;
+            double end_time;
+        };
+
+        class scoped_lazy_wait
+        {
+        public:
+            scoped_lazy_wait(const double& seconds, const double& sleep_interval)
+            {
+                start_time = current_time();
+                end_time = start_time + seconds;
+                this->sleep_interval = sleep_interval;
+            }
+
+            ~scoped_lazy_wait()
+            {
+                const double c_time = current_time();
+                lazy_wait(end_time - c_time, sleep_interval);
+            }
+
+        private:
+            double start_time;
+            double end_time;
+            double sleep_interval;
+        };
     }
 }

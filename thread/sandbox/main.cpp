@@ -61,6 +61,33 @@ int main()
     cl::thread::calculate_delta_time();
     cl::log::info("Recorded delta time: " + std::to_string(cl::thread::delta_time()) + " seconds");
 
+    cl::log::info("Starting thread test, testing 1 second scoped sleep");
+    start = cl::thread::current_time();
+    {
+        cl::thread::scoped_sleep s(1);
+        cl::log::info("Entered new scope");
+    }
+    duration = cl::thread::current_time() - start;
+    cl::log::info("Took " + std::to_string(duration) + " seconds");
+
+    cl::log::info("Starting thread test, testing 1 second scoped wait");
+    start = cl::thread::current_time();
+    {
+        cl::thread::scoped_wait s(1);
+        cl::log::info("Entered new scope");
+    }
+    duration = cl::thread::current_time() - start;
+    cl::log::info("Took " + std::to_string(duration) + " seconds");
+
+    cl::log::info("Starting thread test, testing 1 second scoped lazy wait");
+    start = cl::thread::current_time();
+    {
+        cl::thread::scoped_lazy_wait s(1, 0.0001);
+        cl::log::info("Entered new scope");
+    }
+    duration = cl::thread::current_time() - start;
+    cl::log::info("Took " + std::to_string(duration) + " seconds");
+
     cl::log::info("All tests completed!");
 
     return 0;
