@@ -64,57 +64,60 @@ void log(const char* message, const log_level level)
     mux.unlock();
 }
 
-extern "C" void init(LibraryManager* libManager)
+extern "C"
 {
-    cl::thread::detail::load_lib(libManager);
-}
+    void init(LibraryManager* libManager)
+    {
+        cl::thread::detail::load_lib(libManager);
+    }
 
-extern "C" void set_log_time(bool value)
-{
-    log_time = value;
-}
+    void set_log_time(bool value)
+    {
+        log_time = value;
+    }
 
-extern "C" void set_log_thread(bool value)
-{
-    log_thread = value;
-}
+    void set_log_thread(bool value)
+    {
+        log_thread = value;
+    }
 
-extern "C" void fatal(const std::string& message)
-{
-    log(message.c_str(), L_FATAL);
-}
+    void fatal(const std::string& message)
+    {
+        log(message.c_str(), L_FATAL);
+    }
 
-extern "C" void error(const std::string& message)
-{
-    log(message.c_str(), L_ERROR);
-}
+    void error(const std::string& message)
+    {
+        log(message.c_str(), L_ERROR);
+    }
 
-extern "C" void warn(const std::string& message)
-{
-    log(message.c_str(), L_WARN);
-}
+    void warn(const std::string& message)
+    {
+        log(message.c_str(), L_WARN);
+    }
 
-extern "C" void info(const std::string& message)
-{
-    log(message.c_str(), L_INFO);
-}
+    void info(const std::string& message)
+    {
+        log(message.c_str(), L_INFO);
+    }
 
-#ifndef DIST
-extern "C" void debug(const std::string& message)
-{
-    log(message.c_str(), L_DEBUG);
-}
-#else
-extern "C" void debug(const std::string& message) {}
-#endif
+    #ifndef DIST
+    void debug(const std::string& message)
+    {
+        log(message.c_str(), L_DEBUG);
+    }
+    #else
+    void debug(const std::string& message) {}
+    #endif
 
-#ifndef DIST
-extern "C" void trace(const std::string& message)
-{
-    log(message.c_str(), L_TRACE);
+    #ifndef DIST
+    void trace(const std::string& message)
+    {
+        log(message.c_str(), L_TRACE);
+    }
+    #else
+    void cl::log::trace(const std::string& message) {}
+    #endif
 }
-#else
-extern "C" void cl::log::trace(const std::string& message) {}
-#endif
 
 #endif
