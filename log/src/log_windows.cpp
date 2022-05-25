@@ -116,7 +116,7 @@ extern "C"
         log(message.c_str(), L_TRACE);
     }
     #else
-    void cl::log::trace(const std::string& message) {}
+    void trace(const std::string& message) {}
     #endif
 }
 

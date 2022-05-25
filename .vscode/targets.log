@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 25 20:29:31 2022
+# Make data base, printed on Wed May 25 20:52:08 2022
 
 # Variables
 
@@ -59,7 +59,7 @@ MAKEFILE_LIST :=
 # automatic
 @F = $(notdir $@)
 # environment
-GIO_LAUNCHED_DESKTOP_FILE = /home/daniel/Desktop/code.desktop
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # environment
 USERNAME = daniel
 # environment
@@ -109,7 +109,7 @@ XDG_SESSION_DESKTOP = pop
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 24918
+GIO_LAUNCHED_DESKTOP_FILE_PID = 37056
 # automatic
 %F = $(notdir $%)
 # environment
@@ -159,7 +159,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = pop
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d08b2935-f83e-4d0e-bbe9-33be24b4e63d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-67096037-a9c1-4cab-808c-6eb4ee6c3485.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -204,7 +204,6 @@ QT_ACCESSIBILITY = 1
 DEFAULTS_PATH = /usr/share/gconf/pop.default.path
 # default
 MAKEFILES := 
- 
 # environment
 LC_NUMERIC = en_GB.UTF-8
 # automatic
@@ -234,7 +233,7 @@ LC_ADDRESS = en_GB.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 24918
+VSCODE_PID = 37056
 # variable set hash-table stats:
 # Load=111/1024=11%, Rehash=0, Collisions=18/133=14%
 
@@ -289,6 +288,7 @@ GNUmakefile:
 #  Failed to be updated.
 
 # files hash-table stats:
+ 
 # Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
@@ -302,6 +302,6 @@ GNUmakefile:
 # strcache performance: lookups = 24 / hit rate = 12%
 # hash-table stats:
 # Load=21/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Wed May 25 20:29:31 2022
+# Finished Make data base on Wed May 25 20:52:08 2022
 
  
