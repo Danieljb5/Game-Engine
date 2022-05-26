@@ -66,6 +66,7 @@ int main()
     {
         cl::thread::scoped_sleep s(1);
         cl::log::info("Entered new scope");
+        cl::thread::sleep(0.5);
     }
     duration = cl::thread::current_time() - start;
     cl::log::info("Took " + std::to_string(duration) + " seconds");
@@ -75,6 +76,7 @@ int main()
     {
         cl::thread::scoped_wait s(1);
         cl::log::info("Entered new scope");
+        cl::thread::sleep(0.5);
     }
     duration = cl::thread::current_time() - start;
     cl::log::info("Took " + std::to_string(duration) + " seconds");
@@ -84,6 +86,7 @@ int main()
     {
         cl::thread::scoped_lazy_wait s(1, 0.0001);
         cl::log::info("Entered new scope");
+        cl::thread::sleep(0.5);
     }
     duration = cl::thread::current_time() - start;
     cl::log::info("Took " + std::to_string(duration) + " seconds");

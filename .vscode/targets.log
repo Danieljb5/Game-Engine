@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 25 20:52:08 2022
+# Make data base, printed on Thu May 26 20:36:00 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:70440
+JOURNAL_STREAM = 8:71145
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-pop:/etc/xdg
 # makefile
@@ -73,7 +73,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 4191
+MANAGERPID = 4153
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -89,7 +89,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/4436,unix/pop-os:/tmp/.ICE-unix/4436
+SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/4425,unix/pop-os:/tmp/.ICE-unix/4425
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -99,7 +99,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 1334fe1cfe104b9b8b9257913f6044b4
+INVOCATION_ID = 223397eef3734f79827d9e61c0d74686
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -109,7 +109,7 @@ XDG_SESSION_DESKTOP = pop
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 37056
+GIO_LAUNCHED_DESKTOP_FILE_PID = 12963
 # automatic
 %F = $(notdir $%)
 # environment
@@ -121,7 +121,7 @@ PWD = /home/daniel/Local Projects/Game Engine
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 4399
+SSH_AGENT_PID = 4364
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = pop:GNOME
 # environment
@@ -159,7 +159,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = pop
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-67096037-a9c1-4cab-808c-6eb4ee6c3485.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-0b0384d3-c7e8-4e38-af09-7ebfef12e7af.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -233,7 +233,7 @@ LC_ADDRESS = en_GB.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 37056
+VSCODE_PID = 12963
 # variable set hash-table stats:
 # Load=111/1024=11%, Rehash=0, Collisions=18/133=14%
 
@@ -280,6 +280,7 @@ makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 # Not a target:
 GNUmakefile:
 #  Implicit rule search has been done.
@@ -288,7 +289,6 @@ GNUmakefile:
 #  Failed to be updated.
 
 # files hash-table stats:
- 
 # Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
@@ -302,6 +302,6 @@ GNUmakefile:
 # strcache performance: lookups = 24 / hit rate = 12%
 # hash-table stats:
 # Load=21/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Wed May 25 20:52:08 2022
+# Finished Make data base on Thu May 26 20:36:00 2022
 
  
