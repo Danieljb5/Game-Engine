@@ -119,7 +119,15 @@ public:
     {
         if(!libraries.count(name))
         {
-            libraries[name] = detail::load_library(name);
+            void* lib = detail::load_library(name);
+            if(lib)
+            {
+                libraries[name] = lib;
+            }
+            else
+            {
+                return nullptr;
+            }
         }
         return libraries[name];
     }
