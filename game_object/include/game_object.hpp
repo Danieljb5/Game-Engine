@@ -1,7 +1,7 @@
 #pragma once
 
-#include <log.hpp>
-#include <vector2.hpp>
+#include <log/include/log.hpp>
+#include <vector2/include/vector2.hpp>
 #include <vector>
 
 namespace cl

@@ -1,5 +1,5 @@
-#include <library_loader.hpp>
-#include <ts_queue.hpp>
+#include <base/library_loader.hpp>
+#include "../include/ts_queue.hpp"
 #include <string>
 #include <thread>
 #include <unordered_map>

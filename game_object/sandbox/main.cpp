@@ -1,6 +1,6 @@
-#include <game_object.hpp>
-#include <log.hpp>
-#include <vector2.hpp>
+#include <game_object/include/game_object.hpp>
+#include <log/include/log.hpp>
+#include <vector2/include/vector2.hpp>
 
 class MyScript : public cl::ComponentBase
 {

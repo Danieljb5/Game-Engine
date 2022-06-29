@@ -41,7 +41,7 @@ DIST_LINKDIRS =
 DIST_CMDS = 
 
 # Platform flags #
-COMMON_FLAGS = -I ../base
+COMMON_FLAGS = -I ../
 COMMON_INCLUDES = 
 COMMON_LINKS = -pthread
 COMMON_LINKDIRS = 

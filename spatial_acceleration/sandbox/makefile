@@ -42,7 +42,7 @@ DIST_CMDS =
 
 # Platform flags #
 COMMON_FLAGS = 
-COMMON_INCLUDES = -I ../include -I ../../thread/include -I ../../base -I ../../vector2/include -I ../../game_object/include -I ../../log/include
+COMMON_INCLUDES = -I ../..
 COMMON_LINKS = -pthread
 COMMON_LINKDIRS = 
 COMMON_CMDS = 

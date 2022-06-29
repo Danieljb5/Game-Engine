@@ -42,7 +42,7 @@ DIST_CMDS =
 
 # Platform flags #
 COMMON_FLAGS = 
-COMMON_INCLUDES = -I ../base -I ../thread/include
+COMMON_INCLUDES = -I ../
 COMMON_LINKS = -pthread
 COMMON_LINKDIRS = 
 COMMON_CMDS = 

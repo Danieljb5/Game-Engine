@@ -1,10 +1,8 @@
-#include <log.hpp>
+#include <base/entry_setup.hpp>
+#include <log/include/log.hpp>
 
 int main()
 {
-    LibraryManager libManager;
-    cl::log::detail::load_lib(&libManager);
-
     cl::log::trace("Hello there");
     cl::log::debug("Hello there");
     cl::log::info("Hello there");

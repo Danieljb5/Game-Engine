@@ -1,10 +1,10 @@
 #pragma once
 
-#include <library_loader.hpp>
-#include <vector2.hpp>
+#include <base/library_loader.hpp>
+#include <vector2/include/vector2.hpp>
+#include <game_object/include/game_object.hpp>
+#include "spatial_struct.hpp"
 #include <list>
-#include <game_object.hpp>
-#include <spatial_struct.hpp>
 
 namespace cl
 {

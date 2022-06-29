@@ -1,11 +1,9 @@
-#include <spatial_acceleration.hpp>
+#include <base/entry_setup.hpp>
+#include <log/include/log.hpp>
+#include <spatial_acceleration/include/spatial_acceleration.hpp>
 
 int main()
 {
-    LibraryManager libManager;
-    cl::sa::detail::load_lib(&libManager);
-    cl::log::detail::load_lib(&libManager);
-
     void* container = cl::sa::create_storage({0, 0}, {100000, 100000});
     
     std::vector<cl::GameObject*> gos;

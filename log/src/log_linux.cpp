@@ -1,8 +1,8 @@
-#include <platform.hpp>
+#include <base/platform.hpp>
 #ifdef LINUX
 
-#include <library_loader.hpp>
-#include <thread.hpp>
+#include <base/library_loader.hpp>
+#include <thread/include/thread.hpp>
 #include <iostream>
 #include <chrono>
 #include <ctime>

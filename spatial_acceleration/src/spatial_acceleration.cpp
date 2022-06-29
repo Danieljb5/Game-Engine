@@ -1,8 +1,8 @@
-#include <game_object.hpp>
-#include <vector2.hpp>
+#include <game_object/include/game_object.hpp>
+#include <vector2/include/vector2.hpp>
+#include "../include/spatial_struct.hpp"
 #include <list>
 #include <algorithm>
-#include <spatial_struct.hpp>
 
 // #define GRID_HALF_SIZE 1048576
 // #define GRID_LOCAL_HALF_SIZE 16

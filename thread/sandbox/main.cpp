@@ -1,5 +1,6 @@
-#include <log.hpp>
-#include <thread.hpp>
+#include <base/entry_setup.hpp>
+#include <log/include/log.hpp>
+#include <thread/include/thread.hpp>
 
 bool condition = false;
 
@@ -18,10 +19,6 @@ void thread()
 
 int main()
 {
-    LibraryManager libManager;
-    cl::log::detail::load_lib(&libManager);
-    cl::thread::detail::load_lib(&libManager);
-
     cl::log::set_log_thread(true);
     cl::log::set_log_time(true);
 

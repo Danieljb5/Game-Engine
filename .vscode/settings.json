@@ -39,6 +39,7 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "list": "cpp",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "algorithm": "cpp"
     }
 }

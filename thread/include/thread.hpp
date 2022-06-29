@@ -1,7 +1,7 @@
 #pragma once
 
-#include <library_loader.hpp>
-#include <ts_queue.hpp>
+#include <base/library_loader.hpp>
+#include "ts_queue.hpp"
 #include <string>
 #include <iostream>
 
