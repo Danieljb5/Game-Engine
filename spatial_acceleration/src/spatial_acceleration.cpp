@@ -695,9 +695,9 @@ public:
 
     void remove(QuadTreeIterator item)
     {
+        delete item->item;
         item->location.container->erase(item->location.iterator);
         m_all_items.erase(item);
-        delete item->item;
     }
 
     void relocate(QuadTreeIterator& item)

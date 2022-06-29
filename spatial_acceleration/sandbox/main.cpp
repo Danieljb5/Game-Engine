@@ -23,13 +23,11 @@ int main()
 
     cl::log::info("Removing half of objects...");
 
-    int i = 0;
     for(auto obj = cl::sa::begin(container); obj != cl::sa::end(container); obj++)
     {
         if(obj == cl::sa::end(container)) break;
-        if(i % 2 == 0) continue;
-        cl::sa::erase(container, obj);
-        i++;
+        cl::sa::erase(container, obj++);
+        if(obj == cl::sa::end(container)) break;
     }
 
     search = cl::sa::search(container, {0, 0}, {5000, 50});
