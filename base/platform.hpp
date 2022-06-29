@@ -11,3 +11,10 @@
 #define WINDOWS
 #endif
 #endif
+
+#ifndef __unix__
+#if defined(_WIN32) || defined(WIN32)
+#else
+#error Unsupported platform
+#endif
+#endif
