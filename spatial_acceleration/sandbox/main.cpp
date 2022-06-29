@@ -26,7 +26,7 @@ int main()
     for(auto obj = cl::sa::begin(container); obj != cl::sa::end(container); obj++)
     {
         if(obj == cl::sa::end(container)) break;
-        cl::sa::erase(container, obj++);
+        cl::sa::erase(container, obj++); // new iterator is selected, then old iterator is destroyed (if obj is erased and then incremented, a runtime error will happen)
         if(obj == cl::sa::end(container)) break;
     }
 
