@@ -41,6 +41,10 @@ namespace cl
         template <typename U>
         Vector2<T>& operator/=(const U& rhs) { x /= (T)rhs; y /= (T)rhs; return *this; }
         operator std::string() { return std::to_string(x) + ", " + std::to_string(y); }
+        template <typename U>
+        bool operator==(const Vector2<U>& rhs) { return x == (T)rhs.x && y == (T)rhs.y; }
+        template <typename U>
+        bool operator!=(const Vector2<U>& rhs) { return x != (T)rhs.x || y != (T)rhs.y; }
     };
 
     typedef Vector2<float> Vector2f;

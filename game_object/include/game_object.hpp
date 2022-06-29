@@ -6,6 +6,16 @@
 
 namespace cl
 {
+    // struct Tile
+    // {
+    //     uint32_t value;
+    // };
+
+    // struct TileTemp : public Tile
+    // {
+    //     Vector2i position;
+    // };
+
     class GameObject;
 
     namespace detail
@@ -51,8 +61,8 @@ namespace cl
 
         }
 
-        virtual void Start() {};
-        virtual void Update() {};
+        virtual void Start() {}
+        virtual void Update() {}
         virtual void LateUpdate() {}
         virtual void OnCreate() {}
         virtual void OnDestroy() {}
@@ -100,13 +110,6 @@ namespace cl
         Vector2<float> position;
         Vector2<float> scale;
         float rotation;
-
-    private:
-        using ComponentBase::Start;
-        using ComponentBase::Update;
-        using ComponentBase::LateUpdate;
-        using ComponentBase::OnCreate;
-        using ComponentBase::OnDestroy;
     };
 
     class GameObject
@@ -127,7 +130,7 @@ namespace cl
             components.clear();
         }
 
-        cl::Transform& Transform()
+        cl::Transform& Transform() const
         {
             return *(cl::Transform*)components[0];
         }
@@ -176,6 +179,9 @@ namespace cl
             }
             return result;
         }
+
+        GameObject(const GameObject& go) = delete;
+        GameObject& operator=(const GameObject& go) = delete;
 
     private:
         std::vector<ComponentBase*> components;
