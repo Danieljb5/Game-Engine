@@ -16,7 +16,7 @@ CXX = g++
 OBJDIR = obj
 SRCDIR = .
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
-DEPS = .. 	# Path to directories containing other makefile projects this depends on #
+DEPS = .. ../thread	# Path to directories containing other makefile projects this depends on #
 LIBGEN = 0 	# Defines whether the output is a library file #
 STATICLIB = 0	# Only active if LIBGEN = 1, creates a static library instead of a dynamic one #
 PROJECT = main
@@ -57,7 +57,7 @@ WINDOWS_FLAGS =
 WINDOWS_INCLUDES = 
 WINDOWS_LINKS = 
 WINDOWS_LINKDIRS = 
-WINDOWS_CMDS = cp ../../windows_common_libs/*.dll $(BUILD_DIR)/ ; cp ../$(BUILD_DIR)/*.dll $(BUILD_DIR)/ ; cp ../../thread/$(BUILD_DIR)/*.dll $(BUILD_DIR)/ cp ../../log/$(BUILD_DIR)/*.dll $(BUILD_DIR)/
+WINDOWS_CMDS = cp ../../windows_common_libs/*.dll $(BUILD_DIR)/ ; cp ../$(BUILD_DIR)/*.dll $(BUILD_DIR)/ ; cp ../../thread/$(BUILD_DIR)/*.dll $(BUILD_DIR)/ ; cp ../../log/$(BUILD_DIR)/*.dll $(BUILD_DIR)/
 
 # Command parameters #
 ifndef platform
