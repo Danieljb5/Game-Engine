@@ -679,13 +679,14 @@ public:
         return m_all_items.cend();
     }
 
-    void insert(const cl::GameObject& item)
+    const cl::sa::QuadTreeItem<cl::GameObject>* insert(const cl::GameObject& item)
     {
         QuadTreeItem<cl::GameObject> qt_item;
         qt_item.item = (cl::GameObject*)&item;
         m_all_items.push_back(qt_item);
         const Rect size = {item.Transform().position, item.Transform().scale};
         m_all_items.back().location = root.insert(std::prev(m_all_items.end()), size);
+        return &m_all_items.back();
     }
 
     std::list<ItemIterator> search(const Rect& area) const
@@ -760,9 +761,9 @@ extern "C"
         return ((QuadTreeWrapper*)container)->cend();
     }
 
-    void insert(void* container, const cl::GameObject& item)
+    const cl::sa::QuadTreeItem<cl::GameObject>* insert(void* container, const cl::GameObject& item)
     {
-        ((QuadTreeWrapper*)container)->insert(item);
+        return ((QuadTreeWrapper*)container)->insert(item);
     }
 
     std::list<ItemIterator> search(void* container, const cl::Vector2d& position, const cl::Vector2d& size)

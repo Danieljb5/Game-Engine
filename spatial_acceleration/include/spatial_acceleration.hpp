@@ -48,9 +48,9 @@ namespace cl
         return cend(container);
         STUB_B_RET(cend, ConstItemIterator, void* container)
 
-        STUB_A(insert, void, void* container, const cl::GameObject& item)
+        STUB_A(insert, const cl::sa::QuadTreeItem<cl::GameObject>*, void* container, const cl::GameObject& item)
         return insert(container, item);
-        STUB_B(insert, void, void* container, const cl::GameObject& item)
+        STUB_B_RET_PTR(insert, const cl::sa::QuadTreeItem<cl::GameObject>*, void* container, const cl::GameObject& item)
 
         STUB_A(search, std::list<ItemIterator>, void* container, const cl::Vector2d& position, const cl::Vector2d& size)
         return search(container, position, size);
