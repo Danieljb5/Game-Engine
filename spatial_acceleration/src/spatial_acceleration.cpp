@@ -501,9 +501,12 @@
 using namespace cl;
 using namespace sa;
 
+
+using QuadTreeContainer = std::list<QuadTreeItem<cl::GameObject>>;
+using QuadTreeIterator = QuadTreeContainer::iterator;
+
 #define MAX_DEPTH 20
 
-template <typename T>
 class QuadTree
 {
 public:
@@ -525,7 +528,11 @@ public:
 
     void clear()
     {
-        if(m_items.size() > 0) m_items.clear();
+        while(m_items.size() > 0)
+        {
+            delete m_items.front().first->item;
+            m_items.pop_front();
+        }
         for(int i = 0; i < 4; i++)
         {
             if(m_children[i])
@@ -547,7 +554,7 @@ public:
         return count;
     }
 
-    QuadTreeItemLocation<T> insert(const T& item, const Rect& item_size)
+    QuadTreeItemLocation<QuadTreeIterator> insert(const QuadTreeIterator& item, const Rect& item_size)
     {
         for(int i = 0; i < 4; i++)
         {
@@ -615,16 +622,15 @@ protected:
     Rect m_area;
     Rect m_child_areas[4];
     QuadTree* m_children[4] = {nullptr};
-    std::list<std::pair<T, Rect>> m_items;
+    std::list<std::pair<QuadTreeIterator, Rect>> m_items;
 };
 
 class QuadTreeWrapper
 {
-    using QuadTreeContainer = std::list<QuadTreeItem<cl::GameObject>>;
 
 protected:
     QuadTreeContainer m_all_items;
-    QuadTree<typename QuadTreeContainer::iterator> root;
+    QuadTree root;
 
 public:
     QuadTreeWrapper(const Rect& size = {{0.0f, 0.0f}, {100.0f, 100.0f}}) : root(size)
@@ -653,12 +659,12 @@ public:
         m_all_items.clear();
     }
 
-    typename QuadTreeContainer::iterator begin()
+    QuadTreeIterator begin()
     {
         return m_all_items.begin();
     }
 
-    typename QuadTreeContainer::iterator end()
+    QuadTreeIterator end()
     {
         return m_all_items.end();
     }
@@ -687,13 +693,14 @@ public:
         return root.search(area);
     }
 
-    void remove(typename QuadTreeContainer::iterator item)
+    void remove(QuadTreeIterator item)
     {
         item->location.container->erase(item->location.iterator);
         m_all_items.erase(item);
+        delete item->item;
     }
 
-    void relocate(typename QuadTreeContainer::iterator& item)
+    void relocate(QuadTreeIterator& item)
     {
         const Rect size = {item->item->Transform().position, item->item->Transform().scale};
         item->location.container->erase(item->location.iterator);

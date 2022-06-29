@@ -29,7 +29,6 @@ int main()
         if(obj == cl::sa::end(container)) break;
         if(i % 2 == 0) continue;
         cl::sa::erase(container, obj);
-        delete obj.iterator->item;
         i++;
     }
 
@@ -38,13 +37,7 @@ int main()
 
     cl::log::info("Clearing tree...");
 
-    for(auto obj = cl::sa::begin(container); obj != cl::sa::end(container); obj++)
-    {
-        delete obj.iterator->item;
-    }
-
     cl::sa::clear(container);
-
 
     search = cl::sa::search(container, {0, 0}, {5000, 50});
     cl::log::info(std::string("Got: ") + std::to_string(search.size()) + std::string(" out of 0 objects when searching half area"));
