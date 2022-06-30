@@ -1,5 +1,6 @@
 #include <base/library_loader.hpp>
 #include <base/platform.hpp>
+#include <log/include/log.hpp>
 
 #ifdef LINUX
 #include <execinfo.h>
@@ -123,11 +124,12 @@ extern "C"
 #endif
     }
 
-#ifdef DEBUG
     void create_sigsegv() // intentionally creates a segfault to test the signal handler
     {
+        cl::log::fatal("Initiating forced segmentation fault, this is only valid for debug builds. Please do not include this function in non-testing builds.");
+#ifdef DEBUG
         int* foo = (int*)-1;
         std::cout << *foo << "\n";
-    }
 #endif
+    }
 }
