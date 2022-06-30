@@ -111,6 +111,7 @@ extern "C"
 {
     void init(LibraryManager* libManager)
     {
+        cl::log::detail::load_lib(libManager);
 #ifdef LINUX
         struct sigaction sigact;
         sigact.sa_sigaction = crit_err_hdlr;
@@ -126,7 +127,7 @@ extern "C"
 
     void create_sigsegv() // intentionally creates a segfault to test the signal handler
     {
-        cl::log::fatal("Initiating forced segmentation fault, this is only valid for debug builds. Please do not include this function in non-testing builds.");
+        cl::log::fatal("Initiating forced segmentation fault, this is only enabled on debug builds. Please do not include this function in non-testing builds.");
 #ifdef DEBUG
         int* foo = (int*)-1;
         std::cout << *foo << "\n";
