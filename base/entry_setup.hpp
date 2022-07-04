@@ -6,6 +6,8 @@
 #include "../vector2/include/vector2.hpp"
 #include "../game_object/include/game_object.hpp"
 #include "../spatial_acceleration/include/spatial_acceleration.hpp"
+#include "../assets/include/assets.hpp"
+#include "../renderer/include/renderer.hpp"
 
 namespace cl
 {
@@ -22,6 +24,8 @@ namespace cl
                 cd::detail::load_lib(&global_inst);
                 thread::detail::load_lib(&global_inst);
                 sa::detail::load_lib(&global_inst);
+                assets::detail::load_lib(&global_inst);
+                renderer::detail::load_lib(&global_inst);
             }
         };
 

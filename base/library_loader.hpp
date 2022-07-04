@@ -158,7 +158,7 @@ private:
             } \
             else \
             { \
-                std::cout << "[" << #_name << "] error: library already loaded\n"; \
+                std::cout << "[" << #_name << "] library already loaded\n"; \
             } \
         } \
         void init_stub(LibraryManager* libManager) \

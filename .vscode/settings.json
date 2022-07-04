@@ -40,6 +40,16 @@
         "utility": "cpp",
         "list": "cpp",
         "numbers": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "filesystem": "cpp",
+        "codecvt": "cpp",
+        "ctime": "cpp",
+        "ratio": "cpp",
+        "sstream": "cpp",
+        "atomic": "cpp",
+        "condition_variable": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     }
 }
