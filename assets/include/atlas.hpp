@@ -7,6 +7,11 @@
 
 namespace cl
 {
+    namespace renderer
+    {
+        struct SpriteRenderer;
+    }
+
     namespace assets
     {
         namespace detail
@@ -47,6 +52,11 @@ namespace cl
         
         struct Sprite : public detail::Sprite
         {
+            Sprite() : detail::Sprite(nullptr, SDL_Rect())
+            {
+
+            }
+
             Sprite(detail::Atlas* parent, const SDL_Rect& area) : detail::Sprite(parent, area)
             {
 
@@ -60,7 +70,13 @@ namespace cl
 
             void set_scale(const Vector2f& scale)
             {
-                this->position = scale;
+                this->scale = scale;
+                cache.dirty = true;
+            }
+
+            void set_layer(const int8_t& layer)
+            {
+                this->layer = layer;
                 cache.dirty = true;
             }
 
@@ -74,12 +90,47 @@ namespace cl
                 return this->scale;
             }
 
-        private:
+            const int8_t& get_layer() const
+            {
+                return this->layer;
+            }
+
+        protected:
             Vector2f position = {0, 0};
             Vector2f scale = {1, 1};
+            int8_t layer = 0;
             using detail::Sprite::parent;
             using detail::Sprite::area;
             using detail::Sprite::cache;
+        };
+
+        struct GoSprite : public Sprite
+        {
+            friend cl::renderer::SpriteRenderer;
+
+            GoSprite() : Sprite()
+            {
+
+            }
+
+            GoSprite(const Sprite& spr) : Sprite(((detail::Sprite*)&spr)->parent, ((detail::Sprite*)&spr)->area)
+            {
+                set_layer(spr.get_layer());
+            }
+
+            GoSprite(detail::Atlas* parent, const SDL_Rect& area) : Sprite(parent, area)
+            {
+
+            }
+
+            using Sprite::set_layer;
+            using Sprite::get_layer;
+
+        protected:
+            using Sprite::set_position;
+            using Sprite::set_scale;
+            using Sprite::get_position;
+            using Sprite::get_scale;
         };
 
         struct Atlas : public detail::Atlas

@@ -17,15 +17,17 @@ namespace cl
     // };
 
     class GameObject;
+    struct Transform;
 
     namespace detail
     {
+        cl::Transform& _go_transform(cl::GameObject* go);
         template <typename T>
-        bool _go_has_component(GameObject* go);
+        bool _go_has_component(cl::GameObject* go);
         template <typename T>
-        T* _go_get_component(GameObject* go);
+        T* _go_get_component(cl::GameObject* go);
         template <typename T>
-        std::vector<T>* _go_get_components(GameObject* go);
+        std::vector<T>* _go_get_components(cl::GameObject* go);
 
         struct ComponentBase
         {
@@ -39,14 +41,15 @@ namespace cl
 
             }
 
-            void _set_parent(GameObject* parent)
+            void _set_parent(cl::GameObject* parent)
             {
                 this->parent = parent;
             }
 
         protected:
-            GameObject* parent;
+            cl::GameObject* parent;
         };
+
     }
 
     struct ComponentBase : public detail::ComponentBase
@@ -64,6 +67,7 @@ namespace cl
         virtual void Start() {}
         virtual void Update() {}
         virtual void LateUpdate() {}
+        virtual void OnDraw() {}
         virtual void OnCreate() {}
         virtual void OnDestroy() {}
 
@@ -73,6 +77,11 @@ namespace cl
         }
 
     protected:
+        cl::Transform& Transform() const
+        {
+            return detail::_go_transform(parent);
+        }
+
         template <typename T>
         bool HasComponent()
         {
@@ -95,6 +104,34 @@ namespace cl
         using detail::ComponentBase::_set_parent;
     };
 
+    namespace detail
+    {
+        class GameObject
+        {
+        public:
+            GameObject()
+            {
+                
+            }
+
+            ~GameObject()
+            {
+                
+            }
+
+            virtual void _start() = 0;
+            virtual void _update() = 0;
+            virtual void _late_update() = 0;
+            virtual void _on_draw() = 0;
+
+            GameObject(const GameObject& go) = delete;
+            GameObject& operator=(const GameObject& go) = delete;
+
+        protected:
+            std::vector<cl::ComponentBase*> components;
+        };
+    }
+
     struct Transform : public ComponentBase
     {
         Transform()
@@ -107,15 +144,15 @@ namespace cl
 
         }
 
-        Vector2<float> position;
-        Vector2<float> scale;
+        Vector2<float> position = 0_v;
+        Vector2<float> scale = 1_v;
         float rotation;
     };
 
-    class GameObject
+    class GameObject : public detail::GameObject
     {
     public:
-        GameObject()
+        GameObject() : detail::GameObject()
         {
             AddComponent(new cl::Transform());
         }
@@ -130,11 +167,6 @@ namespace cl
             components.clear();
         }
 
-        cl::Transform& Transform() const
-        {
-            return *(cl::Transform*)components[0];
-        }
-
         void AddComponent(ComponentBase* component)
         {
             components.push_back(component);
@@ -142,6 +174,11 @@ namespace cl
             component->OnCreate();
         }
 
+        cl::Transform& Transform() const
+        {
+            return *(cl::Transform*)components[0];
+        }
+        
         template <typename T>
         bool HasComponent()
         {
@@ -185,22 +222,59 @@ namespace cl
 
     private:
         std::vector<ComponentBase*> components;
+
+        void _start() override
+        {
+            for(auto c : components)
+            {
+                c->Start();
+            }
+        }
+
+        void _update() override
+        {
+            for(auto c : components)
+            {
+                c->Update();
+            }
+        }
+
+        void _late_update() override
+        {
+            for(auto c : components)
+            {
+                c->LateUpdate();
+            }
+        }
+
+        void _on_draw() override
+        {
+            for(auto c : components)
+            {
+                c->OnDraw();
+            }
+        }
     };
 
+    Transform& detail::_go_transform(cl::GameObject* go)
+    {
+        return go->Transform();
+    }
+
     template <typename T>
-    bool detail::_go_has_component(GameObject* go)
+    bool detail::_go_has_component(cl::GameObject* go)
     {
         return go->HasComponent<T>();
     }
 
     template <typename T>
-    T* detail::_go_get_component(GameObject* go)
+    T* detail::_go_get_component(cl::GameObject* go)
     {
         return go->GetComponent<T>();
     }
 
     template <typename T>
-    std::vector<T>* detail::_go_get_components(GameObject* go)
+    std::vector<T>* detail::_go_get_components(cl::GameObject* go)
     {
         return go->GetComponents<T>();
     }

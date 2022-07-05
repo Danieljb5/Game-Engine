@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
+#include <map>
+#include <list>
 
 using namespace cl;
 using namespace log;
@@ -10,6 +12,7 @@ using namespace assets;
 
 SDL_Window* global_window = nullptr;
 SDL_Renderer* global_renderer = nullptr;
+std::map<int8_t, std::list<Sprite*>> draw_stack;
 
 extern "C"
 {
@@ -63,23 +66,30 @@ extern "C"
         assets::set_window_surface(nullptr);
     }
 
-    void render_sprite(const Sprite& spr)
+    void render_sprite(Sprite& spr)
     {
-        cl::assets::detail::Sprite _spr = *(cl::assets::detail::Sprite*)&spr;
-        if(_spr.cache.dirty)
+        auto _spr = (cl::assets::detail::Sprite*)&spr;
+        if(!_spr->parent)
         {
-            _spr.cache.tex_handle = _spr.parent->handle;
-            Vector2f pos = spr.get_position();
-            Vector2f scale = spr.get_scale();
+            log::warn("tried to draw uninitialised sprite");
+            return;
+        }
+        if(_spr->cache.dirty)
+        {
+            _spr->cache.tex_handle = _spr->parent->handle;
+            const Vector2f pos = spr.get_position();
+            const Vector2f scale = spr.get_scale();
             SDL_Rect rect;
             rect.x = pos.x;
             rect.y = pos.y;
-            rect.w = scale.x * _spr.area.w;
-            rect.h = scale.y * _spr.area.h;
-            _spr.cache.dst_bounds = rect;
-            _spr.cache.dirty = false;
+            rect.w = scale.x * _spr->area.w;
+            rect.h = scale.y * _spr->area.h;
+            _spr->cache.dst_bounds = rect;
+            _spr->cache.dirty = false;
         }
-        SDL_RenderCopy(global_renderer, _spr.cache.tex_handle, &_spr.area, &_spr.cache.dst_bounds);
+        auto area = _spr->area;
+        auto dst = _spr->cache.dst_bounds;
+        SDL_RenderCopy(global_renderer, _spr->cache.tex_handle, &area, &dst);
     }
 
     void render_clear()
@@ -90,6 +100,26 @@ extern "C"
     void render_swap()
     {
         SDL_RenderPresent(global_renderer);
+    }
+
+    void push_render_stack(Sprite& spr)
+    {
+        draw_stack[spr.get_layer()].push_back(&spr);
+    }
+
+    void flush_render_stack()
+    {
+        render_clear();
+        for(auto it = draw_stack.begin(); it != draw_stack.end(); it++)
+        {
+            for(auto& spr : it->second)
+            {
+                render_sprite(*spr);
+            }
+            it->second.clear();
+        }
+        render_swap();
+        draw_stack.clear();        
     }
 
     bool poll_event(SDL_Event& event)

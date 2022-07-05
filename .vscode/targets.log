@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul  4 14:28:35 2022
+# Make data base, printed on Tue Jul  5 12:46:44 2022
 
 # Variables
 
@@ -21,7 +23,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-4815687f-a996-4b8c-a0cd-51a187fe0afc.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-33be28ed-d83b-4700-bed9-6a06a0af1448.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/pop.mandatory.path
 # environment
@@ -99,13 +101,13 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 38673
+VSCODE_PID = 8110
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/3807,unix/pop-os:/tmp/.ICE-unix/3807
+SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/3773,unix/pop-os:/tmp/.ICE-unix/3773
 # automatic
 *F = $(notdir $*)
 # environment
@@ -147,7 +149,7 @@ LC_MONETARY = en_GB.UTF-8
 # environment
 LC_TIME = en_GB.UTF-8
 # environment
-INVOCATION_ID = 77e6d1631d6f43fb9269746c62f63437
+INVOCATION_ID = d193deae1be040c7ae2ee9f6e150ee66
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -179,7 +181,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /home/daniel/Desktop/code.desktop
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 3830
+SYSTEMD_EXEC_PID = 3792
 # environment
 DISPLAY = :1
 # environment
@@ -191,11 +193,11 @@ DEFAULTS_PATH = /usr/share/gconf/pop.default.path
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 3605
+MANAGERPID = 3571
 # environment
 LC_MEASUREMENT = en_GB.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 38673
+GIO_LAUNCHED_DESKTOP_FILE_PID = 8110
 # environment
 _ = /usr/share/code/code
 # environment
@@ -205,7 +207,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-JOURNAL_STREAM = 8:52741
+JOURNAL_STREAM = 8:52124
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -288,9 +290,6 @@ GNUmakefile:
 #  Failed to be updated.
 
 # files hash-table stats:
- 
-make: *** No rule to make target 'all'.  Stop.
-
 # Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
@@ -304,6 +303,6 @@ make: *** No rule to make target 'all'.  Stop.
 # strcache performance: lookups = 32 / hit rate = 9%
 # hash-table stats:
 # Load=29/8192=0%, Rehash=0, Collisions=0/32=0%
-# Finished Make data base on Mon Jul  4 14:28:35 2022
+# Finished Make data base on Tue Jul  5 12:46:44 2022
 
  

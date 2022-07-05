@@ -40,11 +40,12 @@ namespace cl
         Vector2<T>& operator*=(const U& rhs) { x *= (T)rhs; y *= (T)rhs; return *this; }
         template <typename U>
         Vector2<T>& operator/=(const U& rhs) { x /= (T)rhs; y /= (T)rhs; return *this; }
-        operator std::string() { return std::to_string(x) + ", " + std::to_string(y); }
+        Vector2<T> operator-() { return {-x, -y}; }
+        operator std::string() const { return std::to_string(x) + ", " + std::to_string(y); }
         template <typename U>
-        bool operator==(const Vector2<U>& rhs) { return x == (T)rhs.x && y == (T)rhs.y; }
+        friend bool operator==(const Vector2<T>& lhs, const Vector2<U>& rhs) { return lhs.x == (T)rhs.x && lhs.y == (T)rhs.y; }
         template <typename U>
-        bool operator!=(const Vector2<U>& rhs) { return x != (T)rhs.x || y != (T)rhs.y; }
+        friend bool operator!=(const Vector2<T>& lhs, const Vector2<U>& rhs) { return lhs.x != (T)rhs.x || lhs.y != (T)rhs.y; }
     };
 
     typedef Vector2<float> Vector2f;
@@ -52,3 +53,15 @@ namespace cl
     typedef Vector2<int> Vector2i;
     typedef Vector2<unsigned int> Vector2u;
 }
+
+struct vec_proxy
+{
+    long double val;
+    vec_proxy operator-() { return {-val}; }
+    friend cl::Vector2d operator/(const vec_proxy& lhs, const vec_proxy& rhs) { return {(double)lhs.val, (double)rhs.val}; }
+    template <typename T>
+    operator cl::Vector2<T>() { return {(T)val, (T)val}; }
+};
+
+inline constexpr vec_proxy operator""_v(const long double val) { return {val}; }
+inline constexpr vec_proxy operator""_v(const unsigned long long int val) { return {(long double)val}; }

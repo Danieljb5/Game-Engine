@@ -3,6 +3,8 @@
 #include <base/library_loader.hpp>
 #include <string>
 
+using namespace std::string_literals;
+
 namespace cl
 {
     namespace log
