@@ -24,7 +24,7 @@ extern "C"
         log::detail::load_lib(libManager);
     }
 
-    void create_window(const std::string& title, const uint width, const uint height, const uint32_t flags)
+    void create_window(const std::string& title, const unsigned int width, const unsigned int height, const uint32_t flags)
     {
         if(global_window)
         {
@@ -89,7 +89,10 @@ extern "C"
         }
         auto area = _spr->area;
         auto dst = _spr->cache.dst_bounds;
-        SDL_RenderCopy(global_renderer, _spr->cache.tex_handle, &area, &dst);
+        if(SDL_RenderCopy(global_renderer, _spr->cache.tex_handle, &area, &dst) != 0)
+        {
+            log::error("failed to render sprite. Reason: "s + SDL_GetError());
+        }
     }
 
     void render_clear()

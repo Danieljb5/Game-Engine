@@ -2,10 +2,8 @@
 
 #include <renderer/include/renderer.hpp>
 #include <assets/include/assets.hpp>
-#include <SDL.h>
-#include <SDL_image.h>
 
-int main()
+int main(int argc, char** argv)
 {
     cl::renderer::create_window("Packing example", 1280, 720, SDL_WINDOW_SHOWN);
 
@@ -28,9 +26,12 @@ int main()
             }
         }
 
-        cl::renderer::render_clear();
-        cl::renderer::render_sprite(s);
-        cl::renderer::render_swap();
+        cl::renderer::push_render_stack(s);
+        cl::renderer::flush_render_stack();
+
+        // cl::renderer::render_clear();
+        // cl::renderer::render_sprite(s);
+        // cl::renderer::render_swap();
     }
 
     cl::renderer::destroy_window();

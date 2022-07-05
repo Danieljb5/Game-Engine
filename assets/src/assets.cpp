@@ -45,7 +45,7 @@ struct PackingArea
         this->rects.clear();
     }
 
-    uint largest_h = 0;
+    unsigned int largest_h = 0;
     Vector2u position = {0, 0};
     PB_Rect area;
     std::vector<PackingArea*>* areas_handle = nullptr;
@@ -214,13 +214,16 @@ extern "C"
                 area.y = p.position.y;
                 area.w = p.size.x;
                 area.h = p.size.y;
-                a.path_map.insert({p.name, area});
+                std::string new_name = p.name;
+                std::replace(new_name.begin(), new_name.end(), '\\', '/');
+                a.path_map.insert({new_name, area});
             }
             SDL_Texture* tex = SDL_CreateTextureFromSurface(global_renderer, surf);
             if(!tex)
             {
                 cl::log::error("failed to create atlas texture");
             }
+
             SDL_FreeSurface(surf);
             a.handle = tex;
             Atlas out = *(assets::Atlas*)&a;

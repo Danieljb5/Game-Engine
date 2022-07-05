@@ -10,9 +10,9 @@ namespace cl
     {
         LIBRARY(cl_renderer)
         
-        STUB_A(create_window, void, const std::string& title, const uint width, const uint height, const uint32_t flags)
+        STUB_A(create_window, void, const std::string& title, const unsigned int width, const unsigned int height, const uint32_t flags)
         return create_window(title, width, height, flags);
-        STUB_B(create_window, void, const std::string& title, const uint width, const uint height, const uint32_t flags)
+        STUB_B(create_window, void, const std::string& title, const unsigned int width, const unsigned int height, const uint32_t flags)
 
         STUB(destroy_window, void)
 

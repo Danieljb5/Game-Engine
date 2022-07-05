@@ -1,5 +1,6 @@
 #pragma once
 
+#include <log/include/log.hpp>
 #include <vector2/include/vector2.hpp>
 #include <SDL.h>
 #include <string>
@@ -137,6 +138,11 @@ namespace cl
         {
             Sprite get_sprite(std::string path)
             {
+                if(!path_map.count(path))
+                {
+                    log::error("image '"s + path + "' could not be loaded"s);
+                    return {};
+                }
                 return {this, path_map[path]};
             }
 

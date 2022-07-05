@@ -51,13 +51,13 @@ LINUX_FLAGS = `sdl2-config --cflags --libs`
 LINUX_INCLUDES = 
 LINUX_LINKS = ../../vendor/lib/linux/libSDL2_image.so
 LINUX_LINKDIRS = -L $(BUILD_DIR) -ldl
-LINUX_CMDS = 
+LINUX_CMDS = cp ../../vendor/lib/linux/*.so $(BUILD_DIR)/
 
 WINDOWS_FLAGS = -mwindows
 WINDOWS_INCLUDES = 
 WINDOWS_LINKS = ../../vendor/lib/windows/SDL2main.lib ../../vendor/lib/windows/SDL2.lib ../../vendor/lib/windows/SDL2_image.lib
 WINDOWS_LINKDIRS = 
-WINDOWS_CMDS = 
+WINDOWS_CMDS = cp ../../windows_common_libs/*.dll $(BUILD_DIR)/ ; cp ../../vendor/lib/windows/*.dll $(BUILD_DIR)/
 
 # Command parameters #
 ifndef platform

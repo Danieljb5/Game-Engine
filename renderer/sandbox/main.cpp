@@ -4,7 +4,7 @@
 #include <vector2/include/vector2.hpp>
 #include <renderer/include/renderer.hpp>
 
-int main()
+int main(int argc, char** argv)
 {
     cl::renderer::create_window("Renderer test", 1280, 720, SDL_WINDOW_SHOWN);
 
@@ -14,6 +14,10 @@ int main()
     cl::GameObject go;
     go.AddComponent(new cl::renderer::SpriteRenderer());
     go.GetComponent<cl::renderer::SpriteRenderer>().Sprite = atlas.get_sprite("assets/image.png");
+    cl::GameObject go2;
+    go2.AddComponent(new cl::renderer::SpriteRenderer());
+    go2.GetComponent<cl::renderer::SpriteRenderer>().Sprite = atlas.get_sprite("assets/image2.png");
+    go2.GetComponent<cl::renderer::SpriteRenderer>().Sprite.set_layer(1);
 
     ((cl::detail::GameObject*)&go)->_start();
 
@@ -30,11 +34,14 @@ int main()
         }
 
         ((cl::detail::GameObject*)&go)->_update();
+        ((cl::detail::GameObject*)&go2)->_update();
 
         go.Transform().position.x = 100;
 
         ((cl::detail::GameObject*)&go)->_late_update();
+        ((cl::detail::GameObject*)&go2)->_late_update();
         ((cl::detail::GameObject*)&go)->_on_draw();
+        ((cl::detail::GameObject*)&go2)->_on_draw();
 
         cl::renderer::flush_render_stack();
     }
