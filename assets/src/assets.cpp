@@ -147,7 +147,7 @@ extern "C"
         cl::log::detail::load_lib(libManager);
     }
 
-    std::vector<Atlas> generate_atlas(const std::string& path, const Vector2u& size)
+    Atlas generate_atlas(const std::string& path, const Vector2u& size)
     {
         std::list<std::string> files;
         for(const auto& file : std::experimental::filesystem::recursive_directory_iterator(path))
@@ -172,65 +172,63 @@ extern "C"
             prs.push_back(pr);
         }
 
-        std::vector<Atlas> result;
         std::vector<PackingRect> failed;
         for(auto& p : prs) failed.push_back(p);
 
-        while(failed.size() > 0)
+        std::vector<PackingRect> packed;
+        pack(failed, size);
+
+        for(int i = 0; i < failed.size(); i++)
         {
-            std::vector<PackingRect> packed;
-            pack(failed, size);
-
-            for(int i = 0; i < failed.size(); i++)
+            if(failed[i].was_packed)
             {
-                if(failed[i].was_packed)
-                {
-                    packed.push_back(failed[i]);
-                    failed[i] = failed.back();
-                    failed.pop_back();
-                    i--;
-                }
+                packed.push_back(failed[i]);
+                failed[i] = failed.back();
+                failed.pop_back();
+                i--;
             }
-
-            assets::detail::Atlas a;
-            SDL_Surface* surf = SDL_CreateRGBSurface(0, size.x, size.y, 32, 0, 0, 0, 0);
-            for(auto& p : packed)
-            {
-                if(p.handle)
-                {
-                    SDL_Rect dst;
-                    dst.x = p.position.x;
-                    dst.y = p.position.y;
-                    dst.w = p.size.x;
-                    dst.h = p.size.y;
-                    SDL_BlitSurface(p.handle, nullptr, surf, &dst);
-                }
-                else
-                {
-                    cl::log::error(p.name + " could not be added to an atlas because it does not exist");
-                }
-                SDL_Rect area;
-                area.x = p.position.x;
-                area.y = p.position.y;
-                area.w = p.size.x;
-                area.h = p.size.y;
-                std::string new_name = p.name;
-                std::replace(new_name.begin(), new_name.end(), '\\', '/');
-                a.path_map.insert({new_name, area});
-            }
-            SDL_Texture* tex = SDL_CreateTextureFromSurface(global_renderer, surf);
-            if(!tex)
-            {
-                cl::log::error("failed to create atlas texture");
-            }
-
-            SDL_FreeSurface(surf);
-            a.handle = tex;
-            Atlas out = *(assets::Atlas*)&a;
-            result.push_back(out);
         }
 
-        return result;
+        assets::detail::Atlas a;
+        SDL_Surface* surf = SDL_CreateRGBSurface(0, size.x, size.y, 32, 0, 0, 0, 0);
+        for(auto& p : packed)
+        {
+            if(p.handle)
+            {
+                SDL_Rect dst;
+                dst.x = p.position.x;
+                dst.y = p.position.y;
+                dst.w = p.size.x;
+                dst.h = p.size.y;
+                SDL_BlitSurface(p.handle, nullptr, surf, &dst);
+            }
+            else
+            {
+                cl::log::error(p.name + " could not be added to an atlas because it does not exist");
+            }
+            SDL_Rect area;
+            area.x = p.position.x;
+            area.y = p.position.y;
+            area.w = p.size.x;
+            area.h = p.size.y;
+            std::string new_name = p.name;
+            std::replace(new_name.begin(), new_name.end(), '\\', '/');
+            a.path_map.insert({new_name, area});
+        }
+        SDL_Texture* tex = SDL_CreateTextureFromSurface(global_renderer, surf);
+        if(!tex)
+        {
+            cl::log::error("failed to create atlas texture");
+        }
+
+        SDL_FreeSurface(surf);
+        a.handle = tex;
+        Atlas out = *(assets::Atlas*)&a;
+        if(failed.size() > 0)
+        {
+            log::error("failed to pack "s + std::to_string(failed.size()) + " sprites, please expand the atlas."s);
+        }
+        return out;
     }
 
     void set_renderer(SDL_Renderer* renderer)

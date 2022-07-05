@@ -8,8 +8,7 @@ int main(int argc, char** argv)
 {
     cl::renderer::create_window("Renderer test", 1280, 720, SDL_WINDOW_SHOWN);
 
-    auto atlases = cl::assets::generate_atlas("assets", 1024_v);
-    auto atlas = atlases[0];
+    auto atlas = cl::assets::generate_atlas("assets", 1024_v);
 
     cl::GameObject go;
     go.AddComponent(new cl::renderer::SpriteRenderer());

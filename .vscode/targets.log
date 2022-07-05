@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jul  5 18:52:08 2022
+# Make data base, printed on Tue Jul  5 19:23:14 2022
 
 # Variables
 
@@ -23,7 +23,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-673e4fe4-31c4-490b-8ad4-68597318981a.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-4cf1ae60-1f15-43ca-b065-2b88f727d330.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/pop.mandatory.path
 # environment
@@ -101,7 +101,7 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 53252
+VSCODE_PID = 58397
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -197,7 +197,7 @@ MANAGERPID = 3571
 # environment
 LC_MEASUREMENT = en_GB.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 53252
+GIO_LAUNCHED_DESKTOP_FILE_PID = 58397
 # environment
 _ = /usr/share/code/code
 # environment
@@ -280,52 +280,30 @@ makefile:
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
- 
 #  Failed to be updated.
- 
 
- 
 # Not a target:
- 
 GNUmakefile:
- 
 #  Implicit rule search has been done.
- 
 #  File does not exist.
- 
 #  File has been updated.
- 
 #  Failed to be updated.
- 
 
 # files hash-table stats:
  
 # Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
- 
 
- 
 # No 'vpath' search paths.
- 
 
- 
 # No general ('VPATH' variable) search path.
- 
 
- 
 # strcache buffers: 1 (0) / strings = 29 / storage = 292 B / avg = 10 B
- 
 # current buf: size = 8162 B / used = 292 B / count = 29 / avg = 10 B
- 
 
- 
 # strcache performance: lookups = 32 / hit rate = 9%
- 
 # hash-table stats:
- 
 # Load=29/8192=0%, Rehash=0, Collisions=0/32=0%
- 
-# Finished Make data base on Tue Jul  5 18:52:08 2022
- 
+# Finished Make data base on Tue Jul  5 19:23:14 2022
 
  

@@ -11,9 +11,9 @@ namespace cl
     {
         LIBRARY(cl_assets)
 
-        STUB_A(generate_atlas, std::vector<cl::assets::Atlas>, const std::string& path, const Vector2u& size)
+        STUB_A(generate_atlas, cl::assets::Atlas, const std::string& path, const Vector2u& size)
         return generate_atlas(path, size);
-        STUB_B_RET(generate_atlas, std::vector<cl::assets::Atlas>, const std::string& path, const Vector2u& size)
+        STUB_B_RET(generate_atlas, cl::assets::Atlas, const std::string& path, const Vector2u& size)
 
         STUB_A(set_renderer, void, SDL_Renderer* renderer)
         return set_renderer(renderer);

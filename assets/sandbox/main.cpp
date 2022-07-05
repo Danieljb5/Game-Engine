@@ -7,10 +7,9 @@ int main(int argc, char** argv)
 {
     cl::renderer::create_window("Packing example", 1280, 720, SDL_WINDOW_SHOWN);
 
-    auto atlases = cl::assets::generate_atlas("assets", {1024, 1024});
-    auto a = atlases[0];
+    auto a = cl::assets::generate_atlas("assets", {1024, 1024});
 
-    auto s = a.get_sprite("assets/image.png"); // replace with a file name from assets
+    auto s = a.get_sprite("assets/image.png");
 
     bool running = true;
     while(running)
@@ -29,6 +28,7 @@ int main(int argc, char** argv)
         cl::renderer::push_render_stack(s);
         cl::renderer::flush_render_stack();
 
+        // these are replaced by push_render_stack, which pushes sprites into a draw queue and flush_render_stack, which clears the screen, draws objects in the queue and swaps the buffers
         // cl::renderer::render_clear();
         // cl::renderer::render_sprite(s);
         // cl::renderer::render_swap();
