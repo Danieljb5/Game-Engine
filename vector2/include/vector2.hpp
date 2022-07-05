@@ -17,35 +17,35 @@ namespace cl
         template <typename U>
         operator Vector2<U>() { return {(U)x, (U)y}; }
         template <typename U>
-        friend Vector2<T> operator+(Vector2<T> lhs, const Vector2<U>& rhs) { return lhs += rhs; }
+        friend constexpr Vector2<T> operator+(Vector2<T> lhs, const Vector2<U>& rhs) { return lhs += rhs; }
         template <typename U>
-        friend Vector2<T> operator-(Vector2<T> lhs, const Vector2<U>& rhs) { return lhs -= rhs; }
+        friend constexpr Vector2<T> operator-(Vector2<T> lhs, const Vector2<U>& rhs) { return lhs -= rhs; }
         template <typename U>
-        friend Vector2<T> operator*(Vector2<T> lhs, const Vector2<U>& rhs) { return lhs *= rhs; }
+        friend constexpr Vector2<T> operator*(Vector2<T> lhs, const Vector2<U>& rhs) { return lhs *= rhs; }
         template <typename U>
-        friend Vector2<T> operator/(Vector2<T> lhs, const Vector2<U>& rhs) { return lhs /= rhs; }
+        friend constexpr Vector2<T> operator/(Vector2<T> lhs, const Vector2<U>& rhs) { return lhs /= rhs; }
         template <typename U>
-        friend Vector2<T> operator*(Vector2<T> lhs, const U& rhs) { return lhs *= rhs; }
+        friend constexpr Vector2<T> operator*(Vector2<T> lhs, const U& rhs) { return lhs *= rhs; }
         template <typename U>
-        friend Vector2<T> operator/(Vector2<T> lhs, const U& rhs) { return lhs /= rhs; }
+        friend constexpr Vector2<T> operator/(Vector2<T> lhs, const U& rhs) { return lhs /= rhs; }
         template <typename U>
-        Vector2<T>& operator+=(const Vector2<U>& rhs) { x += (T)rhs.x; y += (T)rhs.y; return *this; }
+        constexpr Vector2<T>& operator+=(const Vector2<U>& rhs) { x += (T)rhs.x; y += (T)rhs.y; return *this; }
         template <typename U>
-        Vector2<T>& operator-=(const Vector2<U>& rhs) { x -= (T)rhs.x; y -= (T)rhs.y; return *this; }
+        constexpr Vector2<T>& operator-=(const Vector2<U>& rhs) { x -= (T)rhs.x; y -= (T)rhs.y; return *this; }
         template <typename U>
-        Vector2<T>& operator*=(const Vector2<U>& rhs) { x *= (T)rhs.x; y *= (T)rhs.y; return *this; }
+        constexpr Vector2<T>& operator*=(const Vector2<U>& rhs) { x *= (T)rhs.x; y *= (T)rhs.y; return *this; }
         template <typename U>
-        Vector2<T>& operator/=(const Vector2<U>& rhs) { x /= (T)rhs.x; y /= (T)rhs.y; return *this; }
+        constexpr Vector2<T>& operator/=(const Vector2<U>& rhs) { x /= (T)rhs.x; y /= (T)rhs.y; return *this; }
         template <typename U>
-        Vector2<T>& operator*=(const U& rhs) { x *= (T)rhs; y *= (T)rhs; return *this; }
+        constexpr Vector2<T>& operator*=(const U& rhs) { x *= (T)rhs; y *= (T)rhs; return *this; }
         template <typename U>
-        Vector2<T>& operator/=(const U& rhs) { x /= (T)rhs; y /= (T)rhs; return *this; }
-        Vector2<T> operator-() { return {-x, -y}; }
+        constexpr Vector2<T>& operator/=(const U& rhs) { x /= (T)rhs; y /= (T)rhs; return *this; }
+        constexpr Vector2<T> operator-() { return {-x, -y}; }
         operator std::string() const { return std::to_string(x) + ", " + std::to_string(y); }
         template <typename U>
-        friend bool operator==(const Vector2<T>& lhs, const Vector2<U>& rhs) { return lhs.x == (T)rhs.x && lhs.y == (T)rhs.y; }
+        friend constexpr bool operator==(const Vector2<T>& lhs, const Vector2<U>& rhs) { return lhs.x == (T)rhs.x && lhs.y == (T)rhs.y; }
         template <typename U>
-        friend bool operator!=(const Vector2<T>& lhs, const Vector2<U>& rhs) { return lhs.x != (T)rhs.x || lhs.y != (T)rhs.y; }
+        friend constexpr bool operator!=(const Vector2<T>& lhs, const Vector2<U>& rhs) { return lhs.x != (T)rhs.x || lhs.y != (T)rhs.y; }
     };
 
     typedef Vector2<float> Vector2f;
