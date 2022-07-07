@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jul  7 14:03:30 2022
+# Make data base, printed on Thu Jul  7 18:23:42 2022
 
 # Variables
 
@@ -23,7 +23,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f63fecb1-596d-4872-bfe0-9e311990e393.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-44473e21-f016-4a36-bcea-70828c182b45.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/pop.mandatory.path
 # environment
@@ -101,7 +101,7 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 14477
+VSCODE_PID = 29209
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -197,7 +197,7 @@ MANAGERPID = 3573
 # environment
 LC_MEASUREMENT = en_GB.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 14477
+GIO_LAUNCHED_DESKTOP_FILE_PID = 29209
 # environment
 _ = /usr/share/code/code
 # environment
@@ -302,7 +302,8 @@ GNUmakefile:
 
 # strcache performance: lookups = 33 / hit rate = 9%
 # hash-table stats:
+ 
 # Load=30/8192=0%, Rehash=0, Collisions=0/33=0%
-# Finished Make data base on Thu Jul  7 14:03:30 2022
+# Finished Make data base on Thu Jul  7 18:23:42 2022
 
  
