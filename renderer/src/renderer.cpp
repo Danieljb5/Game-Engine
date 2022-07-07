@@ -44,6 +44,42 @@ extern "C"
         assets::set_window_surface(SDL_GetWindowSurface(global_window));
     }
 
+    void create_fullscreen_window(const std::string& title, const uint32_t flags)
+    {
+        if(global_window)
+        {
+            log::error("cannot create window because it already exists");
+            return;
+        }
+
+        if(global_renderer)
+        {
+            log::error("cannot create renderer because it already exists");
+            return;
+        }
+
+        SDL_DisplayMode mode;
+        SDL_GetDesktopDisplayMode(0, &mode);
+        global_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mode.w, mode.h, flags | SDL_WINDOW_FULLSCREEN);
+        global_renderer = SDL_CreateRenderer(global_window, -1, SDL_RENDERER_ACCELERATED);
+        assets::set_renderer(global_renderer);
+        assets::set_window_surface(SDL_GetWindowSurface(global_window));
+    }
+
+    void set_window_icon(const std::string& path)
+    {
+        SDL_Surface* surf = IMG_Load(path.c_str());
+        SDL_SetWindowIcon(global_window, surf);
+        SDL_FreeSurface(surf);
+    }
+
+    int get_refresh_rate()
+    {
+        SDL_DisplayMode mode;
+        SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(global_window), &mode);
+        return mode.refresh_rate;
+    }
+
     void destroy_window()
     {
         if(!global_window)

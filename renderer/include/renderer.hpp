@@ -14,6 +14,18 @@ namespace cl
         return create_window(title, width, height, flags);
         STUB_B(create_window, void, const std::string& title, const unsigned int width, const unsigned int height, const uint32_t flags)
 
+        STUB_A(create_fullscreen_window, void, const std::string& title, const uint32_t flags)
+        return create_fullscreen_window(title, flags);
+        STUB_B(create_fullscreen_window, void, const std::string& title, const uint32_t flags)
+
+        STUB_A(set_window_icon, void, const std::string& path)
+        return set_window_icon(path);
+        STUB_B(set_window_icon, void, const std::string& path)
+
+        STUB_A(get_refresh_rate, int)
+        return get_refresh_rate();
+        STUB_B_RET(get_refresh_rate, int)
+
         STUB(destroy_window, void)
 
         STUB_A(push_render_stack, void, assets::Sprite& spr)

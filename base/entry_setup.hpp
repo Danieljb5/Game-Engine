@@ -8,6 +8,7 @@
 #include "../spatial_acceleration/include/spatial_acceleration.hpp"
 #include "../assets/include/assets.hpp"
 #include "../renderer/include/renderer.hpp"
+#include "../input/include/input.hpp"
 
 namespace cl
 {
@@ -26,6 +27,7 @@ namespace cl
                 sa::detail::load_lib(&global_inst);
                 assets::detail::load_lib(&global_inst);
                 renderer::detail::load_lib(&global_inst);
+                input::detail::load_lib(&global_inst);
             }
         };
 

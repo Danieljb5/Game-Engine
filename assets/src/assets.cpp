@@ -201,6 +201,7 @@ extern "C"
                 dst.w = p.size.x;
                 dst.h = p.size.y;
                 SDL_BlitSurface(p.handle, nullptr, surf, &dst);
+                SDL_FreeSurface(p.handle);
             }
             else
             {
