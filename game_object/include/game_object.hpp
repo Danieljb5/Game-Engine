@@ -3,6 +3,8 @@
 #include <log/include/log.hpp>
 #include <vector2/include/vector2.hpp>
 #include <vector>
+#include <list>
+#include <unordered_map>
 
 namespace cl
 {
@@ -147,6 +149,116 @@ namespace cl
         Vector2<float> position = 0_v;
         Vector2<float> scale = 1_v;
         float rotation;
+    };
+
+    // set tilestorage to an integer type with the smallest size possible to save memory (e.g. 8 bit integer can store 256 tile types)
+    template <size_t Width, size_t Height, typename TileStorage>
+    struct DenseTileMap : public ComponentBase
+    {
+        DenseTileMap()
+        {
+
+        }
+
+        ~DenseTileMap()
+        {
+
+        }
+
+        TileStorage& operator()(size_t x, size_t y)
+        {
+            return tiles[x][y];
+        }
+
+    private:
+        TileStorage tiles[Width][Height] = {0};
+    };
+
+    template <size_t ChunkSize, typename TileStorage>
+    // set tilestorage to an integer type with the smallest size possible to save memory (e.g. 8 bit integer can store 256 tile types)
+    struct SparseTileMap : public ComponentBase
+    {
+        SparseTileMap()
+        {
+            chunks.insert({0, new chunk()});
+        }
+
+        ~SparseTileMap()
+        {
+
+        }
+
+        TileStorage& operator()(size_t x, size_t y)
+        {
+            const uint32_t chunk_x = (uint32_t)(x / ChunkSize);
+            const uint32_t chunk_y = (uint32_t)(y / ChunkSize);
+            const size_t key = (((size_t)chunk_x) << 32) + chunk_y;
+            if(!chunks.count(key)) chunks.insert({key, new chunk()});
+            const size_t off_x = x - (chunk_x * ChunkSize);
+            const size_t off_y = y - (chunk_y * ChunkSize);
+            return (*chunks[key])(off_x, off_y);
+        }
+
+        void Update() override
+        {
+            cleanup_iterator = chunks.find(cleanup_key);
+            if(cleanup_iterator == chunks.end())
+            {
+                cl::log::fatal("Sparse tilemap iterator is invalid");
+                cl::log::fatal("Current tilemap key is "s + std::to_string(cleanup_key));
+                cl::log::fatal("Allowing program to create segfault for debugging");
+            }
+            chunk* c = cleanup_iterator->second;
+            bool has_value = false;
+            for(size_t x = 0; x < ChunkSize; x++)
+            {
+                for(size_t y = 0; y < ChunkSize; y++)
+                {
+                    if((*c)(x, y) != 0)
+                    {
+                        has_value = true;
+                        break;
+                    }
+                }
+            }
+            if(!has_value)
+            {
+                if(chunks.size() > 1)
+                {
+                    auto it = cleanup_iterator;
+                    cleanup_iterator++;
+                    if(cleanup_iterator == chunks.end()) cleanup_iterator = chunks.begin();
+                    cleanup_key = cleanup_iterator->first;
+                    chunks.erase(it);
+                }
+                else
+                {
+                    cleanup_iterator++;
+                    if(cleanup_iterator == chunks.end()) cleanup_iterator = chunks.begin();
+                    cleanup_key = cleanup_iterator->first;
+                }
+            }
+            else
+            {
+                cleanup_iterator++;
+                if(cleanup_iterator == chunks.end()) cleanup_iterator = chunks.begin();
+                cleanup_key = cleanup_iterator->first;
+            }
+        }
+
+        struct chunk
+        {
+            TileStorage& operator()(size_t x, size_t y)
+            {
+                return tiles[x][y];
+            }
+            TileStorage tiles[ChunkSize][ChunkSize] = {0};
+        };
+
+    private:
+        typename std::unordered_map<size_t, chunk*> chunks;
+        typename std::unordered_map<size_t, chunk*>::iterator cleanup_iterator;
+        size_t cleanup_key = 0;
     };
 
     class GameObject : public detail::GameObject

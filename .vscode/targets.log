@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jul  7 18:23:42 2022
+# Make data base, printed on Fri Jul  8 11:09:53 2022
 
 # Variables
 
@@ -23,7 +23,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-44473e21-f016-4a36-bcea-70828c182b45.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-9a715106-94b5-448c-87bf-42e2eede1866.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/pop.mandatory.path
 # environment
@@ -101,13 +101,13 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 29209
+VSCODE_PID = 16214
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/3806,unix/pop-os:/tmp/.ICE-unix/3806
+SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/3809,unix/pop-os:/tmp/.ICE-unix/3809
 # automatic
 *F = $(notdir $*)
 # environment
@@ -149,7 +149,7 @@ LC_MONETARY = en_GB.UTF-8
 # environment
 LC_TIME = en_GB.UTF-8
 # environment
-INVOCATION_ID = bbb94f36cf8146a29b5be7d7fa407cd9
+INVOCATION_ID = 98658b1ecd404b1d873082fc51279b22
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -181,7 +181,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /home/daniel/Desktop/code.desktop
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 3829
+SYSTEMD_EXEC_PID = 3828
 # environment
 DISPLAY = :1
 # environment
@@ -193,11 +193,11 @@ DEFAULTS_PATH = /usr/share/gconf/pop.default.path
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 3573
+MANAGERPID = 3607
 # environment
 LC_MEASUREMENT = en_GB.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 29209
+GIO_LAUNCHED_DESKTOP_FILE_PID = 16214
 # environment
 _ = /usr/share/code/code
 # environment
@@ -207,7 +207,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-JOURNAL_STREAM = 8:58250
+JOURNAL_STREAM = 8:50909
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -298,12 +298,12 @@ GNUmakefile:
 # No general ('VPATH' variable) search path.
 
 # strcache buffers: 1 (0) / strings = 30 / storage = 298 B / avg = 9 B
+ 
 # current buf: size = 8162 B / used = 298 B / count = 30 / avg = 9 B
 
 # strcache performance: lookups = 33 / hit rate = 9%
 # hash-table stats:
- 
 # Load=30/8192=0%, Rehash=0, Collisions=0/33=0%
-# Finished Make data base on Thu Jul  7 18:23:42 2022
+# Finished Make data base on Fri Jul  8 11:09:53 2022
 
  

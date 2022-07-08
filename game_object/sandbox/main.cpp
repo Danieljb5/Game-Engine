@@ -54,5 +54,36 @@ int main()
 
     go.GetComponent<MyScript>().Start();
 
+    cl::GameObject go2;
+    go2.AddComponent(new cl::DenseTileMap<16, 16, uint8_t>());
+    auto& dtm = go2.GetComponent<cl::DenseTileMap<16, 16, uint8_t>>();
+    dtm(5, 5) = 64;
+    cl::log::info("Dense tilemap at (5, 5): "s + std::to_string(dtm(5, 5)));
+    go2.AddComponent(new cl::SparseTileMap<16, uint8_t>());
+    auto& stm = go2.GetComponent<cl::SparseTileMap<16, uint8_t>>();
+
+    ((cl::detail::GameObject*)&go2)->_start();
+    ((cl::detail::GameObject*)&go2)->_update();
+
+    cl::log::info("Sparse tilemap inserting 54 at (54235, 13253)"s);
+    stm(54235, 13253) = 54;
+
+    ((cl::detail::GameObject*)&go2)->_update();
+
+    cl::log::info("Sparse tilemap at (0, 0): "s + std::to_string(stm(0, 0)));
+
+    ((cl::detail::GameObject*)&go2)->_update();
+
+    cl::log::info("Sparse tilemap at (32154, 65347): "s + std::to_string(stm(32154, 65347)));
+
+    ((cl::detail::GameObject*)&go2)->_update();
+
+    cl::log::info("Sparse tilemap at (54235, 13253): "s + std::to_string(stm(54235, 13253)));
+
+    for(int i = 0; i < 100; i++)
+    {
+        ((cl::detail::GameObject*)&go2)->_update();
+    }
+
     return 0;
 }
