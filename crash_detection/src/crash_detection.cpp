@@ -82,7 +82,7 @@ void crit_err_hdlr(int sig_num, siginfo_t* info, void* ucontext)
 #error Unsupported architecture
 #endif
 
-    fprintf(stderr, "signal %d (%s), address is %p from %p\n", sig_num, strsignal(sig_num), info->si_addr, (void*)caller_address);
+    fprintf(stderr, "\nsignal %d (%s), address is %p from %p\n", sig_num, strsignal(sig_num), info->si_addr, (void*)caller_address);
 
     size = backtrace(array, 128);
 
@@ -90,9 +90,9 @@ void crit_err_hdlr(int sig_num, siginfo_t* info, void* ucontext)
 
     messages = backtrace_symbols(array, size);
 
-    for(i = 1; i < size && messages != NULL; ++i)
+    for(i = 2; i < size && messages != NULL; ++i)
     {
-        fprintf(stderr, "[bt]: (%d) %s\n", i, messages[i]);
+        fprintf(stderr, "[bt]: (%d) %s\n", i - 1, messages[i]);
         int p = 0;
         while(messages[i][p] != '(' && messages[i][p] != ' ' && messages[i][p] != 0) ++p;
         char syscom[512] = {0};

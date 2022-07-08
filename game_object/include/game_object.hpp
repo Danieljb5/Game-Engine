@@ -2,6 +2,7 @@
 
 #include <log/include/log.hpp>
 #include <vector2/include/vector2.hpp>
+#include <assets/include/assets.hpp>
 #include <vector>
 #include <list>
 #include <unordered_map>
@@ -27,7 +28,7 @@ namespace cl
         template <typename T>
         bool _go_has_component(cl::GameObject* go);
         template <typename T>
-        T* _go_get_component(cl::GameObject* go);
+        T& _go_get_component(cl::GameObject* go);
         template <typename T>
         std::vector<T>* _go_get_components(cl::GameObject* go);
 
@@ -148,16 +149,47 @@ namespace cl
 
         Vector2<float> position = 0_v;
         Vector2<float> scale = 1_v;
-        float rotation;
     };
 
-    // set tilestorage to an integer type with the smallest size possible to save memory (e.g. 8 bit integer can store 256 tile types)
-    template <size_t Width, size_t Height, typename TileStorage>
-    struct DenseTileMap : public ComponentBase
+    struct TileMapBase : public ComponentBase
+    {
+        struct TileSet
+        {
+            assets::Sprite& operator[](uint16_t tile)
+            {
+                if(!tileset.count(tile))
+                {
+                    cl::log::fatal("Request sprite for uninitialised tile "s + std::to_string(tile));
+                }
+                return tileset[tile];
+            }
+
+            void add_sprite(uint16_t tile, assets::Sprite& spr)
+            {
+                tileset[tile] = spr;
+            }
+
+        private:
+            std::unordered_map<uint16_t, assets::Sprite> tileset;
+        };
+
+        bool solid_tiles[((uint16_t) - 1) + 1] = {false};
+        TileSet set;
+        Vector2f tile_size = 1_v;
+
+        virtual uint16_t& operator()(size_t x, size_t y)
+        {
+            cl::log::fatal("tried to get map values from a base map");
+            exit(1);
+        };
+    };
+
+    template <size_t Width, size_t Height>
+    struct DenseTileMap : public TileMapBase
     {
         DenseTileMap()
         {
-
+            
         }
 
         ~DenseTileMap()
@@ -165,18 +197,21 @@ namespace cl
 
         }
 
-        TileStorage& operator()(size_t x, size_t y)
+        uint16_t& operator()(size_t x, size_t y) override
         {
+            if(x < 0 || x >= Width || y < 0 || y >= Height)
+            {
+                cl::log::fatal("Out of bounds tilemap access at ("s + (std::string)cl::Vector2i(x, y) + ")"s);
+            }
             return tiles[x][y];
         }
 
     private:
-        TileStorage tiles[Width][Height] = {0};
+        uint16_t tiles[Width][Height] = {0};
     };
 
-    template <size_t ChunkSize, typename TileStorage>
-    // set tilestorage to an integer type with the smallest size possible to save memory (e.g. 8 bit integer can store 256 tile types)
-    struct SparseTileMap : public ComponentBase
+    template <size_t ChunkSize>
+    struct SparseTileMap : public TileMapBase
     {
         SparseTileMap()
         {
@@ -188,7 +223,7 @@ namespace cl
 
         }
 
-        TileStorage& operator()(size_t x, size_t y)
+        uint16_t& operator()(size_t x, size_t y) override
         {
             const uint32_t chunk_x = (uint32_t)(x / ChunkSize);
             const uint32_t chunk_y = (uint32_t)(y / ChunkSize);
@@ -248,11 +283,11 @@ namespace cl
 
         struct chunk
         {
-            TileStorage& operator()(size_t x, size_t y)
+            uint16_t& operator()(size_t x, size_t y)
             {
                 return tiles[x][y];
             }
-            TileStorage tiles[ChunkSize][ChunkSize] = {0};
+            uint16_t tiles[ChunkSize][ChunkSize] = {0};
         };
 
     private:
@@ -380,7 +415,7 @@ namespace cl
     }
 
     template <typename T>
-    T* detail::_go_get_component(cl::GameObject* go)
+    T& detail::_go_get_component(cl::GameObject* go)
     {
         return go->GetComponent<T>();
     }

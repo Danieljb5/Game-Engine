@@ -55,12 +55,12 @@ int main()
     go.GetComponent<MyScript>().Start();
 
     cl::GameObject go2;
-    go2.AddComponent(new cl::DenseTileMap<16, 16, uint8_t>());
-    auto& dtm = go2.GetComponent<cl::DenseTileMap<16, 16, uint8_t>>();
+    go2.AddComponent(new cl::DenseTileMap<16, 16>());
+    auto& dtm = go2.GetComponent<cl::DenseTileMap<16, 16>>();
     dtm(5, 5) = 64;
     cl::log::info("Dense tilemap at (5, 5): "s + std::to_string(dtm(5, 5)));
-    go2.AddComponent(new cl::SparseTileMap<16, uint8_t>());
-    auto& stm = go2.GetComponent<cl::SparseTileMap<16, uint8_t>>();
+    go2.AddComponent(new cl::SparseTileMap<16>());
+    auto& stm = go2.GetComponent<cl::SparseTileMap<16>>();
 
     ((cl::detail::GameObject*)&go2)->_start();
     ((cl::detail::GameObject*)&go2)->_update();

@@ -40,5 +40,35 @@ namespace cl
                 push_render_stack(Sprite);
             }
         };
+
+        struct TileMapRenderer : public ComponentBase
+        {
+            // TODO: add engine requirement to add tilemap (and add one automatically if not present)
+
+            TileMapRenderer()
+            {
+
+            }
+
+            ~TileMapRenderer()
+            {
+
+            }
+
+            int8_t layer = 0;
+
+            void OnCreate() override
+            {
+                base = &GetComponent<TileMapBase>();
+            }
+
+            void OnDraw() override
+            {
+                push_map_stack(layer, base);
+            }
+
+        protected:
+            TileMapBase* base = nullptr;
+        };
     }
 }
